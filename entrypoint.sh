@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 if [ -n "${UID+x}" ] && [ "${UID}" != "0" ]; then
   usermod -u "$UID" bitcoin
