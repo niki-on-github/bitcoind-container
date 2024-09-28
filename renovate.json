@@ -9,22 +9,22 @@
     {
       "fileMatch": ["^Dockerfile$"],
       "matchStrings": [
-        "ENV BITCOIN_VERSION=(?<currentValue>\\d+\\.\\d+)"
+        "ARG BISQ_VERSION==(?<currentValue>\\d+\\.\\d+\\.\\d+)"
       ],
-      "depNameTemplate": "bitcoin/bitcoin",
+      "depNameTemplate": "bisq-network/bisq2",
       "datasourceTemplate": "github-releases",
-      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)(\\.\\d+)?$",
-      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+)",
-      "currentValueTemplate": "{{#if currentValue}}{{{currentValue}}}{{else}}0.0{{/if}}"
+      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)(\\.\\d+)\\.(?<patch>\\d+)(\\.\\d+)?$",
+      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+\\.\\d+)",
+      "currentValueTemplate": "{{#if currentValue}}{{{currentValue}}}{{else}}0.0.0{{/if}}"
     }
   ],
   "packageRules": [
     {
-      "matchPackageNames": ["bitcoin/bitcoin"],
-      "extractVersion": "^v(?<version>\\d+\\.\\d+)"
+      "matchPackageNames": ["bisq-network/bisq2"],
+      "extractVersion": "^v(?<version>\\d+\\.\\d+\\.\\d+)"
     },
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["major", "minor", "patch", "pin", "digest"],
       "automerge": true
     }
   ]
