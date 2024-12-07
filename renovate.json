@@ -10,7 +10,6 @@
   "platformAutomerge": true,
   "prHourlyLimit": 99,
   "prConcurrentLimit": 99,
-  "commitMessageExtra": "to {{#if isMajor}}v{{newMajor}}.{{newMinor}}{{else}}v{{{newVersion}}}{{/if}}",
   "customManagers": [
     {
       "customType": "regex",
@@ -32,7 +31,8 @@
       "matchPackageNames": [
         "bitcoin/bitcoin"
       ],
-      "extractVersion": "^v(?<version>\\d+\\.\\d+)"
+      "extractVersion": "^v(?<version>\\d+\\.\\d+)",
+      "commitMessageExtra": "to {{#if isMajor}}v{{newMajor}}.{{newMinor}}{{else}}v{{{newVersion}}}{{/if}}"
     },
     {
       "matchUpdateTypes": [
