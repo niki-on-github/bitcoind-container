@@ -1,46 +1,30 @@
 {
-  "extends": [
-    "config:recommended"
-  ],
-  "schedule": [
-    "before 4am"
-  ],
+  "extends": ["config:base"],
+  "schedule": ["before 4am"],
   "automerge": true,
-  "ignoreTests": true,
   "platformAutomerge": true,
   "prHourlyLimit": 99,
   "prConcurrentLimit": 99,
-  "customManagers": [
+  "regexManagers": [
     {
-      "customType": "regex",
-      "fileMatch": [
-        "^Dockerfile$"
-      ],
+      "fileMatch": ["^Dockerfile$"],
       "matchStrings": [
-        "ARG BISQ_VERSION==(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+        "ENV BITCOIN_VERSION=(?<currentValue>\\d+\\.\\d+)"
       ],
-      "depNameTemplate": "bisq-network/bisq2",
+      "depNameTemplate": "bitcoin/bitcoin",
       "datasourceTemplate": "github-releases",
-      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)(\\.\\d+)\\.(?<patch>\\d+)(\\.\\d+)?$",
-      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+\\.\\d+)",
-      "currentValueTemplate": "{{#if currentValue}}{{{currentValue}}}{{else}}0.0.0{{/if}}"
+      "versioningTemplate": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)(\\.\\d+)?$",
+      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+)",
+      "currentValueTemplate": "{{#if currentValue}}{{{currentValue}}}{{else}}0.0{{/if}}"
     }
   ],
   "packageRules": [
     {
-      "matchPackageNames": [
-        "bisq-network/bisq2"
-      ],
-      "extractVersion": "^v(?<version>\\d+\\.\\d+\\.\\d+)"
+      "matchPackageNames": ["bitcoin/bitcoin"],
+      "extractVersion": "^v(?<version>\\d+\\.\\d+)"
     },
     {
-      "matchUpdateTypes": [
-        "major",
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
     }
   ]
